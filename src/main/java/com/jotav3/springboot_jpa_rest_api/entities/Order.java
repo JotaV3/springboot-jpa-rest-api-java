@@ -1,5 +1,6 @@
 package com.jotav3.springboot_jpa_rest_api.entities;
 
+import com.jotav3.springboot_jpa_rest_api.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +15,8 @@ public class Order implements Serializable {
     private Long id;
     private Instant moment;
 
+    private Integer orderStatusCode;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
@@ -22,9 +25,10 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
+        setOrderStatusCode(orderStatus);
         this.client = client;
     }
 
@@ -42,6 +46,19 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public OrderStatus getOrderStatus(){
+        return OrderStatus.valueOf(orderStatusCode);
+    }
+
+    public Integer getOrderStatusCode(){
+        return orderStatusCode;
+    }
+
+    public void setOrderStatusCode(OrderStatus orderStatus){
+        if(orderStatus != null)
+            this.orderStatusCode = orderStatus.getCode();
     }
 
     public User getClient() {
