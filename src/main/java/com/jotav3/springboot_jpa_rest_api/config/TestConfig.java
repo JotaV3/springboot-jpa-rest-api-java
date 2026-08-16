@@ -1,8 +1,10 @@
 package com.jotav3.springboot_jpa_rest_api.config;
 
+import com.jotav3.springboot_jpa_rest_api.entities.Category;
 import com.jotav3.springboot_jpa_rest_api.entities.Order;
 import com.jotav3.springboot_jpa_rest_api.entities.User;
 import com.jotav3.springboot_jpa_rest_api.entities.enums.OrderStatus;
+import com.jotav3.springboot_jpa_rest_api.repositories.CategoryRepository;
 import com.jotav3.springboot_jpa_rest_api.repositories.OrderRepository;
 import com.jotav3.springboot_jpa_rest_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,15 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+        Category category1 = new Category(null, "Electronics");
+        Category category2 = new Category(null, "Books");
+        Category category3 = new Category(null, "Computers");
+
         User user1 = new User(null, "joão", "joao@gmail.com", "999999", "1234");
         User user2 = new User(null, "alice", "alice@gmail.com", "888888", "5678");
 
@@ -33,5 +42,6 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
     }
 }
