@@ -2,10 +2,12 @@ package com.jotav3.springboot_jpa_rest_api.config;
 
 import com.jotav3.springboot_jpa_rest_api.entities.Category;
 import com.jotav3.springboot_jpa_rest_api.entities.Order;
+import com.jotav3.springboot_jpa_rest_api.entities.Product;
 import com.jotav3.springboot_jpa_rest_api.entities.User;
 import com.jotav3.springboot_jpa_rest_api.entities.enums.OrderStatus;
 import com.jotav3.springboot_jpa_rest_api.repositories.CategoryRepository;
 import com.jotav3.springboot_jpa_rest_api.repositories.OrderRepository;
+import com.jotav3.springboot_jpa_rest_api.repositories.ProductRepository;
 import com.jotav3.springboot_jpa_rest_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,11 +29,20 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Category category1 = new Category(null, "Electronics");
         Category category2 = new Category(null, "Books");
         Category category3 = new Category(null, "Computers");
+
+        Product product1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product product2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Product product3 = new Product(null, "MacBook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product product4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product product5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
         User user1 = new User(null, "joão", "joao@gmail.com", "999999", "1234");
         User user2 = new User(null, "alice", "alice@gmail.com", "888888", "5678");
@@ -43,5 +54,6 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
         categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
     }
 }
