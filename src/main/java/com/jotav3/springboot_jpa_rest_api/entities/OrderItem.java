@@ -1,5 +1,6 @@
 package com.jotav3.springboot_jpa_rest_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jotav3.springboot_jpa_rest_api.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -28,6 +29,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
