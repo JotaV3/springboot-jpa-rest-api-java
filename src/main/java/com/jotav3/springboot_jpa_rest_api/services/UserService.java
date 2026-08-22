@@ -2,6 +2,7 @@ package com.jotav3.springboot_jpa_rest_api.services;
 
 import com.jotav3.springboot_jpa_rest_api.entities.User;
 import com.jotav3.springboot_jpa_rest_api.repositories.UserRepository;
+import com.jotav3.springboot_jpa_rest_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> optional = repository.findById(id);
-        return optional.get();
+        return optional.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User user){
